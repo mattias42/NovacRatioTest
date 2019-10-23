@@ -1,0 +1,6 @@
+/NovacPPP-cppcheck-build-dir
+/build
+/*.cppcheck
+/.vs
+/bin
+/SpectralEvaluation
