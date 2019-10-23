@@ -23,4 +23,3 @@ void ShowMessage(const std::string& msg);
 void ShowMessage(const char message[]);
 void ShowMessage(const novac::CString &message);
 
-int Equals(const std::string &str1, const std::string &str2);
