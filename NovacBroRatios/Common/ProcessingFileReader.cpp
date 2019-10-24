@@ -4,7 +4,7 @@
 
 #include <algorithm>
 
-extern novac::CVolcanoInfo g_volcanoes;   // <-- A list of all known volcanoes
+// extern novac::CVolcanoInfo g_volcanoes;   // <-- A list of all known volcanoes
 
 #undef min
 #undef max
@@ -71,13 +71,13 @@ RETURN_CODE CProcessingFileReader::ReadProcessingFile(const novac::CString &file
         }
 
         // Look for the volcano to parse
-        if (Equals(szToken, str_volcano, strlen(str_volcano))) {
-            novac::CString code;
-            Parse_StringItem(ENDTAG(str_volcano), code);
-            settings.m_volcano = g_volcanoes.GetVolcanoIndex(code);
-            this->szToken = NextToken();
-            continue;
-        }
+        // if (Equals(szToken, str_volcano, strlen(str_volcano))) {
+        //     novac::CString code;
+        //     Parse_StringItem(ENDTAG(str_volcano), code);
+        //     settings.m_volcano = g_volcanoes.GetVolcanoIndex(code);
+        //     this->szToken = NextToken();
+        //     continue;
+        // }
 
         //* Look for the xml tag 'instrument' and use Parse_Instrument and Parse_Location to read serial number and location to object 'settings' */
         if (Equals(szToken, "FitWindows", 10)) {
@@ -548,7 +548,7 @@ RETURN_CODE CProcessingFileReader::WriteProcessingFile(const novac::CString &fil
     }
 
     // the volcano
-    PrintParameter(f, 1, str_volcano, g_volcanoes.GetVolcanoCode(settings.m_volcano));
+    // PrintParameter(f, 1, str_volcano, g_volcanoes.GetVolcanoCode(settings.m_volcano));
 
     // the time frame that we are looking for scans
     PrintParameter(f, 1, str_fromDate, settings.m_fromDate);

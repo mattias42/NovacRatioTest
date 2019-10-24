@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <PPPLib/CString.h>
 #include "Configuration/NovacPPPConfiguration.h"
 #include "SetupFileReader.h"
@@ -7,6 +8,10 @@
 
 // The global configuration object
 Configuration::CNovacPPPConfiguration g_setup;
+
+// The settings of the user: TODO: remove
+extern Configuration::CUserConfiguration g_userSettings;
+
 
 void LoadConfigurations()
 {
@@ -34,13 +39,21 @@ void LoadConfigurations()
     }
 
     // Check if there is a configuration file for every spectrometer serial number
-    for (unsigned int k = 0; k < g_setup.m_instrumentNum; ++k) {
-        evalConfPath.Format("%sconfiguration%c%s.exml", (const char*)common.m_exePath, Poco::Path::separator(), (const char*)g_setup.m_instrument[k].m_serial);
+    for (unsigned int k = 0; k < g_setup.m_instrumentNum; ++k)
+    {
+        std::stringstream evaluationConfigurationPath;
+        evaluationConfigurationPath << "D:\\Development\\NovacRatioTest\\Configuration\\";
+        evaluationConfigurationPath << g_setup.m_instrument[k].m_serial.std_str();
+        evaluationConfigurationPath << ".exml";
 
-        if (IsExistingFile(evalConfPath))
-            eval_reader.ReadConfigurationFile(evalConfPath, &g_setup.m_instrument[k].m_eval, &g_setup.m_instrument[k].m_darkCurrentCorrection);
-        else {
-            throw std::logic_error("Could not find configuration file: " + evalConfPath);
+        // if (IsExistingFile(evalConfPath))
+        if(true)
+        {
+            eval_reader.ReadConfigurationFile(evaluationConfigurationPath.str(), &g_setup.m_instrument[k].m_eval, &g_setup.m_instrument[k].m_darkCurrentCorrection);
+        }
+        else
+        {
+            throw std::logic_error("Could not find configuration file: " + evaluationConfigurationPath.str());
         }
     }
 }

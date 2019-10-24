@@ -1,7 +1,7 @@
 #include "NovacPPPConfiguration.h"
 
 // The global configuration object
-Configuration::CNovacPPPConfiguration g_setup;
+extern Configuration::CNovacPPPConfiguration g_setup;
 
 namespace Configuration
 {
