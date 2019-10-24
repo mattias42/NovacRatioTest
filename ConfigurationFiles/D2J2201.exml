@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- This is the configuration file for the evaluation of spectra in the NOVAC Post Processing Program -->
+
+<EvaluationConfiguration>
+	<serial>D2J2201</serial>
+	
+	<!-- Master channel -->
+
+		
+	<fitWindow>
+		<channel>0</channel>
+		<name>SO2</name>
+		<validFrom>2009.01.01</validFrom>
+		<validTo>TODAY()</validTo>
+		<specLength>2048</specLength>
+		<interlaceStep>0</interlaceStep>
+        <shiftSky>0</shiftSky>
+		<polyOrder>5</polyOrder>
+		<fitType>2</fitType>
+		<fitLow>379</fitLow>
+		<fitHigh>567</fitHigh>
+		<Reference>
+			<name>SO2</name>
+			<path>D:\NOVAC\NovacData\nevado_del_ruiz\configuration\References\D2J2201_Master_SO2_294K.txt</path>
+			<shiftOption>1</shiftOption>
+			<shiftValue>0.000000</shiftValue>
+			<squeezeOption>1</squeezeOption>
+			<squeezeValue>1.000000</squeezeValue>
+			<columnOption>0</columnOption>
+		</Reference>
+		<Reference>
+			<name>O3</name>
+			<path>D:\NOVAC\NovacData\nevado_del_ruiz\configuration\References\D2J2201_Master_O3_223K.txt</path>
+			<shiftOption>1</shiftOption>
+			<shiftValue>0.000000</shiftValue>
+			<squeezeOption>1</squeezeOption>
+			<squeezeValue>1.000000</squeezeValue>
+			<columnOption>0</columnOption>
+		</Reference>
+		<Reference>
+			<name>RING</name>
+			<path>D:\NOVAC\NovacData\nevado_del_ruiz\configuration\References\D2J2201_Master_Ring_HR.txt</path>
+			<shiftOption>1</shiftOption>
+			<shiftValue>0.000000</shiftValue>
+			<squeezeOption>1</squeezeOption>
+			<squeezeValue>1.000000</squeezeValue>
+			<columnOption>0</columnOption>
+		</Reference>
+		<wavelengthCalibration>
+			<fraunhoferSpec>D:\NOVAC\NovacData\nevado_del_ruiz\configuration\References\D2J2201_Master_solarspec.txt</fraunhoferSpec>
+		</wavelengthCalibration>
+		</DarkCorrection>
+			<dark>SCAN</dark>
+		</DarkCorrection>
+        <fitWindow>
+            <channel>0</channel>
+            <name>BrO</name>
+            <validFrom>2009.01.01</validFrom>
+            <validTo>TODAY()</validTo>
+            <specLength>2048</specLength>
+            <interlaceStep>0</interlaceStep>
+            <shiftSky>0</shiftSky>
+            <polyOrder>5</polyOrder>
+            <fitType>2</fitType>
+            <fitLow>653</fitLow>
+            <fitHigh>916</fitHigh>
+            <Reference>
+                <name>BrO</name>
+                <path>D:\NOVAC\NovacData\nevado_del_ruiz\configuration\References\D2J2200_Master_BrO.txt</path>
+                <shiftOption>1</shiftOption>
+                <shiftValue>0.000000</shiftValue>
+                <squeezeOption>1</squeezeOption>
+                <squeezeValue>1.000000</squeezeValue>
+                <columnOption>0</columnOption>
+            </Reference>
+            <Reference>
+                <name>O3</name>
+                <path>D:\NOVAC\NovacData\nevado_del_ruiz\configuration\References\D2J2201_Master_O3_223K.txt</path>
+                <shiftOption>1</shiftOption>
+                <shiftValue>0.000000</shiftValue>
+                <squeezeOption>1</squeezeOption>
+                <squeezeValue>1.000000</squeezeValue>
+                <columnOption>0</columnOption>
+            </Reference>
+            <Reference>
+                <name>RING</name>
+                <path>D:\NOVAC\NovacData\nevado_del_ruiz\configuration\References\D2J2201_Master_Ring_HR.txt</path>
+                <shiftOption>1</shiftOption>
+                <shiftValue>0.000000</shiftValue>
+                <squeezeOption>1</squeezeOption>
+                <squeezeValue>1.000000</squeezeValue>
+                <columnOption>0</columnOption>
+            </Reference>
+            <wavelengthCalibration>
+                <fraunhoferSpec>D:\NOVAC\NovacData\nevado_del_ruiz\configuration\References\D2J2201_Master_solarspec.txt</fraunhoferSpec>
+            </wavelengthCalibration>
+            </DarkCorrection>
+                <dark>SCAN</dark>
+            </DarkCorrection>
+        </fitWindow>        
+	</fitWindow>
+</EvaluationConfiguration>

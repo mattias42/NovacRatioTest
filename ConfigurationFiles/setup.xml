@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- This is the global configuration file for the evaluation of spectra in the NOVAC Post Processing Program -->
+
+<NovacPPPConfiguration>
+	<!-- The following instruments are for Nevado del Ruiz -->
+	<instrument>
+		<serial>D2J2200</serial>
+		<location>
+			<name>Bruma</name>
+			<time_from>2009.11.01</time_from>
+			<time_to>TODAY()</time_to>
+			<latitude>4.900908</latitude>
+			<longitude>-75.335121</longitude>
+			<altitude>4868.190000</altitude>
+			<volcano>Nevado del Ruiz</volcano>
+			<compass>130.000000</compass>
+			<coneangle>90.0</coneangle>
+			<type>0</type>
+			<spec>S2000</spec>
+		</location>
+	</instrument>
+	<instrument>
+		<serial>D2J2201</serial>
+		<location>
+			<name>Alfombrales</name>
+			<time_from>2009.11.01</time_from>
+			<time_to>TODAY()</time_to>
+			<latitude>4.876178</latitude>
+			<longitude>-75.353412</longitude>
+			<altitude>4494.423913</altitude>
+			<volcano>Nevado del Ruiz</volcano>
+			<compass>75.000000</compass>
+			<coneangle>90.0</coneangle>
+			<type>0</type>
+			<spec>S2000</spec>
+		</location>
+	</instrument>    
+</NovacPPPConfiguration>

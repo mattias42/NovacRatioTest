@@ -12,12 +12,13 @@ Configuration::CNovacPPPConfiguration g_setup;
 // The settings of the user: TODO: remove
 extern Configuration::CUserConfiguration g_userSettings;
 
+std::string ConfigurationLocation = "D:/Development/NovacRatioTest/ConfigurationFiles/";
 
 void LoadConfigurations()
 {
     // Declaration of variables and objects
-    novac::CString setupPath = "D:\\Development\\NovacRatioTest\\Configuration\\setup.xml";
-    novac::CString processingPath = "D:\\Development\\NovacRatioTest\\Configuration\\processing.xml";
+    novac::CString setupPath = ConfigurationLocation + "setup.xml";
+    novac::CString processingPath = ConfigurationLocation + "processing.xml";
 
     FileHandler::CSetupFileReader reader;
     FileHandler::CEvaluationConfigurationParser eval_reader;
@@ -42,7 +43,7 @@ void LoadConfigurations()
     for (unsigned int k = 0; k < g_setup.m_instrumentNum; ++k)
     {
         std::stringstream evaluationConfigurationPath;
-        evaluationConfigurationPath << "D:\\Development\\NovacRatioTest\\Configuration\\";
+        evaluationConfigurationPath << ConfigurationLocation;
         evaluationConfigurationPath << g_setup.m_instrument[k].m_serial.std_str();
         evaluationConfigurationPath << ".exml";
 

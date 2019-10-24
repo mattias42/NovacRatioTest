@@ -1,0 +1,38 @@
+<fitWindow name="SO2">
+	<fitLow>379</fitLow>
+	<fitHigh>567</fitHigh>
+	<polyOrder>5</polyOrder>
+	<fitType>2</fitType>
+	<channel>0</channel>
+	<specLength>2048</specLength>
+	<fOptShift>0</fOptShift>
+	<UV>1</UV>
+	<shiftSky>0</shiftSky>
+	<interlaceStep>1</interlaceStep>
+	<solarSpectrum>D:\NOVAC\NovacData\nevado_del_ruiz\configuration\References\D2J2201_Master_solarspec.txt</solarSpectrum>
+	<nRef>3</nRef>
+	<ref name="SO2">
+		<path>D:\NOVAC\NovacData\nevado_del_ruiz\configuration\References\D2J2201_Master_SO2_294K.txt</path>
+		<shiftOption>1</shiftOption>
+		<shiftValue>0.000000</shiftValue>
+		<squeezeOption>1</squeezeOption>
+		<squeezeValue>1.000000</squeezeValue>
+		<columnOption>0</columnOption>
+	</ref>
+	<ref name="O3">
+		<path>D:\NOVAC\NovacData\nevado_del_ruiz\configuration\References\D2J2201_Master_O3_223K.txt</path>
+		<shiftOption>1</shiftOption>
+		<shiftValue>0.000000</shiftValue>
+		<squeezeOption>1</squeezeOption>
+		<squeezeValue>1.000000</squeezeValue>
+		<columnOption>0</columnOption>
+	</ref>
+	<ref name="RING">
+		<path>D:\NOVAC\NovacData\nevado_del_ruiz\configuration\References\D2J2201_Master_Ring_HR.txt</path>
+		<shiftOption>1</shiftOption>
+		<shiftValue>0.000000</shiftValue>
+		<squeezeOption>1</squeezeOption>
+		<squeezeValue>1.000000</squeezeValue>
+		<columnOption>0</columnOption>
+	</ref>
+</fitWindow>
