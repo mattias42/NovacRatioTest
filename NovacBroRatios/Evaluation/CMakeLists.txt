@@ -3,6 +3,7 @@
 cmake_minimum_required (VERSION 3.6)
 
 set(NPP_EVALUATION_HEADERS
+    ${CMAKE_CURRENT_LIST_DIR}/ExtendedScanResult.h
     ${CMAKE_CURRENT_LIST_DIR}/PostEvaluationController.h
     ${CMAKE_CURRENT_LIST_DIR}/ScanEvaluation.h
     ${CMAKE_CURRENT_LIST_DIR}/ScanResult.h

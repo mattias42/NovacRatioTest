@@ -5,6 +5,7 @@
 #include "SetupFileReader.h"
 #include "Common/EvaluationConfigurationParser.h"
 #include "Common/ProcessingFileReader.h"
+#include "PostProcessing.h"
 
 // The global configuration object
 Configuration::CNovacPPPConfiguration g_setup;
@@ -12,6 +13,7 @@ Configuration::CNovacPPPConfiguration g_setup;
 // The settings of the user: TODO: remove
 extern Configuration::CUserConfiguration g_userSettings;
 
+std::string BinaryLocation = "D:/Development/NovacRatioTest/bin/";
 std::string ConfigurationLocation = "D:/Development/NovacRatioTest/ConfigurationFiles/";
 
 void LoadConfigurations()
@@ -59,6 +61,21 @@ void LoadConfigurations()
     }
 }
 
+void DoProcessing()
+{
+    try
+    {
+        CPostProcessing post;
+        post.m_exePath = BinaryLocation;
+
+        post.DoPostProcessing_Flux();
+    }
+    catch (std::exception& e)
+    {
+        ShowMessage(e.what());
+    }
+}
+
 int main()
 {
     std::cout << "This is the test program for novac BrO/SO2 ratio evaluation " << std::endl;
@@ -67,4 +84,5 @@ int main()
     std::cout << " Loading configuration" << std::endl;
     LoadConfigurations();
 
+    DoProcessing();
 }

@@ -23,3 +23,4 @@ void ShowMessage(const std::string& msg);
 void ShowMessage(const char message[]);
 void ShowMessage(const novac::CString &message);
 
+bool IsExistingFile(const novac::CString& filename);

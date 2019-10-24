@@ -13,12 +13,15 @@ add_subdirectory(Configuration)
 add_subdirectory(Evaluation)
 
 add_executable(NovacBrORatios
+    ${CMAKE_CURRENT_LIST_DIR}/dirent.h
     ${CMAKE_CURRENT_LIST_DIR}/main.cpp
     ${CMAKE_CURRENT_LIST_DIR}/stdafx.h
     ${CMAKE_CURRENT_LIST_DIR}/Misc.h
     ${CMAKE_CURRENT_LIST_DIR}/Misc.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Molecule.h
     ${CMAKE_CURRENT_LIST_DIR}/Molecule.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/PostProcessing.h
+    ${CMAKE_CURRENT_LIST_DIR}/PostProcessing.cpp
     ${CMAKE_CURRENT_LIST_DIR}/SetupFileReader.h
     ${CMAKE_CURRENT_LIST_DIR}/SetupFileReader.cpp
 

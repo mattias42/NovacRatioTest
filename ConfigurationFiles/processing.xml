@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- This is the configuration file for the processing of scans in the NOVAC Post Processing Program -->
 <NovacPostProcessing>
-	<outputdirectory>D:\NOVAC\NovacData\nevado_del_ruiz\BrO_ratio\NovacPPP_Output\</outputdirectory>
-	<tempdirectory>D:\NOVAC\NovacData\nevado_del_ruiz\BrO_ratio\NovacPPP_Temp\</tempdirectory>
-	<LocalDirectory>D:\NOVAC\NovacData\nevado_del_ruiz\BrO_ratio\</LocalDirectory>
+	<outputdirectory>D:\Development\NovacRatioTest\Data\Output\</outputdirectory>
+	<tempdirectory>D:\Development\NovacRatioTest\Data\Temp\</tempdirectory>
+	<LocalDirectory>D:\Development\NovacRatioTest\Data\</LocalDirectory>
 
 	<MaxThreadNum>1</MaxThreadNum>
 	<IncludeSubDirs_FTP>1</IncludeSubDirs_FTP>
