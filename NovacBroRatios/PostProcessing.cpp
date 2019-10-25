@@ -66,6 +66,57 @@ bool IsExistingFile(const novac::CString& filename)
     return exists;
 }
 
+std::vector<std::string> GetFilesFromDirectory(const novac::CString& directory)
+{
+    std::vector<std::string> filesFound;
+
+    DIR *dir;
+    if ((dir = opendir(directory.c_str())) != nullptr)
+    {
+        /* print all the files and directories within directory */
+        struct dirent *ent;
+        while ((ent = readdir(dir)) != nullptr)
+        {
+            novac::CString filename = ent->d_name;
+            novac::CString fullFileName = directory + "/" + filename;
+
+            if (novac::Equals(filename, ".") || novac::Equals(filename, ".."))
+            {
+                continue;
+            }
+            else if (ent->d_type == DT_DIR)
+            {
+                // directory, enter it searching for more files
+                auto files = GetFilesFromDirectory(fullFileName);
+                if (files.size() > 0)
+                {
+                    filesFound.insert(end(filesFound), begin(files), end(files));
+                }
+            }
+            else if (ent->d_type == DT_REG)
+            {
+                // regular file
+                if (filename.GetLength() > 4 && novac::Equals(filename.Right(4), ".pak"))
+                {
+                    filesFound.push_back(fullFileName.std_str());
+                }
+            }
+            else
+            {
+                // ignore item.
+                printf("%s\n", ent->d_name);
+            }
+        }
+        closedir(dir);
+    }
+    else
+    {
+        ShowMessage("Failed to open directory, could not locate .pak files.");
+    }
+
+    return filesFound;
+}
+
 
 // this is the working-thread that takes care of evaluating a portion of the scans
 void EvaluateScansThread();
@@ -125,24 +176,7 @@ void CPostProcessing::DoPostProcessing_Flux()
         messageToUser.Format("Searching for .pak - files in directory %s", (const char*)g_userSettings.m_LocalDirectory);
         ShowMessage(messageToUser);
 
-        const bool includeSubDirs = (g_userSettings.m_includeSubDirectories_Local > 0);
-
-        DIR *dir;
-        struct dirent *ent;
-        if ((dir = opendir(g_userSettings.m_LocalDirectory.c_str())) != nullptr)
-        {
-            /* print all the files and directories within directory */
-            while ((ent = readdir(dir)) != NULL)
-            {
-                printf("%s\n", ent->d_name);
-            }
-            closedir(dir);
-        }
-        else {
-            /* could not open directory */
-            perror("");
-            return;
-        }
+        pakFileList = GetFilesFromDirectory(g_userSettings.m_LocalDirectory);
 
         // Filesystem::FileSearchCriterion limits;
         // limits.startTime = g_userSettings.m_fromDate;
