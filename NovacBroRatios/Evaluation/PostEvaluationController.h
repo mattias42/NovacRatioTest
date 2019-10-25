@@ -5,6 +5,7 @@
 #include "ScanResult.h"
 
 // #include "../Common/Common.h"
+#include <PPPLib/Measurement.h>
 #include <SpectralEvaluation/File/ScanFileHandler.h>
 #include <SpectralEvaluation/Evaluation/Ratio.h>
 #include "../Configuration/NovacPPPConfiguration.h"
@@ -94,7 +95,8 @@ namespace Evaluation
             @param txtFileName - if not null, this will on successful writing of the file be filled
                 with the full path and filename of the txt - file generated
             @return SUCCESS if operation completed sucessfully. */
-        // RETURN_CODE WriteEvaluationResult(const CScanResult *result, const FileHandler::CScanFileHandler *scan, const Configuration::CInstrumentLocation *instrLocation, const Evaluation::CFitWindow *window, Meteorology::CWindField &windField, novac::CString *txtFileName = nullptr);
+            // RETURN_CODE WriteEvaluationResult(const CScanResult *result, const FileHandler::CScanFileHandler *scan, const Configuration::CInstrumentLocation *instrLocation, const Evaluation::CFitWindow *window, Meteorology::CWindField &windField, novac::CString *txtFileName = nullptr);
+        RETURN_CODE WriteEvaluationResult(const CScanResult *result, const FileHandler::CScanFileHandler *scan, const Configuration::CInstrumentLocation *instrLocation, const Evaluation::CFitWindow *window, novac::CString *txtFileName = nullptr);
 
         /** Writes the evaluation result of one ratio calculation to the appropriate log file.
             @param result - a vector of calculated ratios.
@@ -110,18 +112,18 @@ namespace Evaluation
             @param scan - the scan itself
             @param scanningInstrument - information about the scanning instrument that generated the scan.
             @return SUCCESS if operation completed sucessfully. */
-        // RETURN_CODE AppendToEvaluationSummaryFile(const CScanResult *result, const FileHandler::CScanFileHandler *scan, const Configuration::CInstrumentLocation *instrLocation, const Evaluation::CFitWindow *window, Meteorology::CWindField &windField);
+            // RETURN_CODE AppendToEvaluationSummaryFile(const CScanResult *result, const FileHandler::CScanFileHandler *scan, const Configuration::CInstrumentLocation *instrLocation, const Evaluation::CFitWindow *window, Meteorology::CWindField &windField);
 
-        /** Appends the evaluation result to the pak-file summary log file.
-            @param result - a CScanResult holding information about the result
-            @param scan - the scan itself
-            @param scanningInstrument - information about the scanning instrument that generated the scan.
-            @return SUCCESS if operation completed sucessfully. */
-            // RETURN_CODE AppendToPakFileSummaryFile(const CScanResult *result, const FileHandler::CScanFileHandler *scan, const Configuration::CInstrumentLocation *instrLocation, const Evaluation::CFitWindow *window, Meteorology::CWindField &windField);
+            /** Appends the evaluation result to the pak-file summary log file.
+                @param result - a CScanResult holding information about the result
+                @param scan - the scan itself
+                @param scanningInstrument - information about the scanning instrument that generated the scan.
+                @return SUCCESS if operation completed sucessfully. */
+                // RETURN_CODE AppendToPakFileSummaryFile(const CScanResult *result, const FileHandler::CScanFileHandler *scan, const Configuration::CInstrumentLocation *instrLocation, const Evaluation::CFitWindow *window, Meteorology::CWindField &windField);
 
-        /** Gets the filename under which the scan-file should be stored.
-            @return SUCCESS if a filename is found. */
-            // RETURN_CODE GetArchivingfileName(novac::CString &pakFile, novac::CString &txtFile, const novac::CString &fitWindowName, const novac::CString &temporaryScanFile, MEASUREMENT_MODE mode);
+            /** Gets the filename under which the scan-file should be stored.
+                @return SUCCESS if a filename is found. */
+        RETURN_CODE GetArchivingfileName(novac::CString &pakFile, novac::CString &txtFile, const novac::CString &fitWindowName, const novac::CString &temporaryScanFile, MEASUREMENT_MODE mode);
 
         /** This function takes as input parameter an eval-log containing the result of a flux - measurement
             and checks the quality of the measurement.

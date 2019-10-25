@@ -61,9 +61,15 @@ bool IsExistingFile(const novac::CString& filename)
 {
     // dead simple way of checking if a file exists.
     FILE *f = fopen(filename.c_str(), "r");
-    bool exists = (f != nullptr);
-    fclose(f);
-    return exists;
+    if (f == nullptr)
+    {
+        return false;
+    }
+    else
+    {
+        fclose(f);
+        return true;
+    }
 }
 
 std::vector<std::string> GetFilesFromDirectory(const novac::CString& directory)
@@ -290,17 +296,18 @@ void CPostProcessing::EvaluateScans(const std::vector<std::string>& pakFileList,
     messageToUser.Format("%ld spectrum files found. Begin evaluation using %d threads.", s_nFilesToProcess, g_userSettings.m_maxThreadNum);
     ShowMessage(messageToUser);
 
-    // start the threads
-    std::vector<std::thread> evalThreads(g_userSettings.m_maxThreadNum);
-    for (unsigned int threadIdx = 0; threadIdx < g_userSettings.m_maxThreadNum; ++threadIdx) {
-        std::thread t{ EvaluateScansThread };
-        evalThreads[threadIdx] = std::move(t);
-    }
+    // // start the threads
+    // std::vector<std::thread> evalThreads(g_userSettings.m_maxThreadNum);
+    // for (unsigned int threadIdx = 0; threadIdx < g_userSettings.m_maxThreadNum; ++threadIdx) {
+    //     std::thread t{ EvaluateScansThread };
+    //     evalThreads[threadIdx] = std::move(t);
+    // }
 
     // make sure that all threads have time to finish before we say that we're ready
-    for (unsigned int threadIdx = 0; threadIdx < g_userSettings.m_maxThreadNum; ++threadIdx) {
-        evalThreads[threadIdx].join();
-    }
+    // for (unsigned int threadIdx = 0; threadIdx < g_userSettings.m_maxThreadNum; ++threadIdx) {
+    //     evalThreads[threadIdx].join();
+    // }
+    EvaluateScansThread();
 
     // copy out the result
     s_evalLogs.CopyTo(evalLogFiles);

@@ -4,6 +4,8 @@
 #include <SpectralEvaluation/Configuration/DarkSettings.h>
 #include <SpectralEvaluation/Evaluation/RatioEvaluation.h>
 
+#include "../Common/EvaluationLogFileHandler.h"
+
 // This is the information we need to continue an old processing
 // #include "../ContinuationOfProcessing.h"
 
@@ -145,9 +147,11 @@ int CPostEvaluationController::EvaluateScan(const novac::CString& pakFileName, c
 
     // 10. Append the result to the log file of the corresponding scanningInstrument
     // if (SUCCESS != WriteEvaluationResult(m_lastResult, &scan, &instrLocation, &fitWindow, windField, txtFileName)) {
-    //     errorMessage.Format("Failed to write evaluation log file %s. No result produced", txtFileName);
-    //     ShowMessage(errorMessage);
-    // }
+    if (SUCCESS != WriteEvaluationResult(m_lastResult, &scan, &instrLocation, &fitWindow, txtFileName))
+    {
+        errorMessage.Format("Failed to write evaluation log file %s. No result produced", txtFileName);
+        ShowMessage(errorMessage);
+    }
 
     // 11. If this was a flux-measurement then we need to see the plume for the measurement to be useful
     //  this check should only be performed on the main fit window.
@@ -177,7 +181,7 @@ int CPostEvaluationController::EvaluateScan(const novac::CString& pakFileName, c
         ratio.SetupFitWindows(fitWindow, fitWindow.child);
         std::vector<Ratio> broRatios = ratio.Run(scan);
 
-        if(broRatios.size() > 0)
+        if (broRatios.size() > 0)
         {
             if (SUCCESS != WriteRatioResult(broRatios, scan, fitWindow)) {
                 errorMessage.Format("Failed to write evaluation ratio result to file %s. No result produced", txtFileName);
@@ -209,8 +213,8 @@ RETURN_CODE CPostEvaluationController::WriteRatioResult(const std::vector<Ratio>
     //     skySpec.m_info.m_device.c_str());
     // const bool writeHeaderLine = !IsExistingFile(fileName);
 
-    const char* fileName = "D:\\Development\\BroRatios\\RatioSummary.txt";
-    const bool writeHeaderLine = true;
+    const char* fileName = "D:/Development/NovacRatioTest/Data/Output/RatioSummary.txt";
+    const bool writeHeaderLine = !IsExistingFile(fileName);
 
     FILE *f = fopen(fileName, "a");
     if (f == nullptr)
@@ -247,8 +251,9 @@ RETURN_CODE CPostEvaluationController::WriteRatioResult(const std::vector<Ratio>
     return SUCCESS;
 }
 
-/*
-RETURN_CODE CPostEvaluationController::WriteEvaluationResult(const CScanResult *result, const FileHandler::CScanFileHandler *scan, const Configuration::CInstrumentLocation *instrLocation, const Evaluation::CFitWindow *window, Meteorology::CWindField &windField, novac::CString *txtFileName)
+
+//RETURN_CODE CPostEvaluationController::WriteEvaluationResult(const CScanResult *result, const FileHandler::CScanFileHandler *scan, const Configuration::CInstrumentLocation *instrLocation, const Evaluation::CFitWindow *window, Meteorology::CWindField &windField, novac::CString *txtFileName)
+RETURN_CODE CPostEvaluationController::WriteEvaluationResult(const CScanResult *result, const FileHandler::CScanFileHandler *scan, const Configuration::CInstrumentLocation *instrLocation, const Evaluation::CFitWindow *window, novac::CString *txtFileName)
 {
     novac::CString string, string1, string2, string3, string4;
     long itSpectrum, itSpecie; // iterators
@@ -256,13 +261,14 @@ RETURN_CODE CPostEvaluationController::WriteEvaluationResult(const CScanResult *
     novac::CString wsSrc, wdSrc, phSrc;
     CDateTime dateTime;
 
-    // get the file-name that we want to have 
-    GetArchivingfileName(pakFile, txtFile, window->name, scan->GetFileName(), result->GetMeasurementMode());
+    // get the file-name that we want to have
+    // GetArchivingfileName(pakFile, txtFile, window->name, scan->GetFileName(), result->GetMeasurementMode());
+    GetArchivingfileName(pakFile, txtFile, window->name, scan->GetFileName(), MODE_FLUX);
     if (txtFileName != nullptr) {
         txtFileName->Format(txtFile);
     }
 
-    // the spectrometer 
+    // the spectrometer
     const SpectrometerModel spectrometerModel = CSpectrometerDatabase::GetInstance().GetModel(instrLocation->m_spectrometerModel);
 
     // The date of the measurement & the serial-number of the spectrometer
@@ -291,23 +297,23 @@ RETURN_CODE CPostEvaluationController::WriteEvaluationResult(const CScanResult *
     string.AppendFormat("\tinterlacesteps=%d\n", scan->GetInterlaceSteps());
     string.AppendFormat("\tstartchannel=%d\n", scan->GetStartChannel());
     string.AppendFormat("\tspectrumlength=%d\n", scan->GetSpectrumLength());
-    string.AppendFormat("\tflux=%.2lf\n", result->GetFlux());
+    // string.AppendFormat("\tflux=%.2lf\n", result->GetFlux());
     string.AppendFormat("\tbattery=%.2f\n", result->GetBatteryVoltage());
     string.AppendFormat("\ttemperature=%.2f\n", result->GetTemperature());
 
     // The mode
-    if (result->IsDirectSunMeasurement())
-        string.Append("\tmode=direct_sun\n");
-    else if (result->IsLunarMeasurement())
-        string.Append("\tmode=lunar\n");
-    else if (result->IsWindMeasurement())
-        string.Append("\tmode=wind\n");
-    else if (result->IsStratosphereMeasurement())
-        string.Append("\tmode=stratospheric\n");
-    else if (result->IsCompositionMeasurement())
-        string.Append("\tmode=composition\n");
-    else
-        string.Append("\tmode=plume\n");
+    // if (result->IsDirectSunMeasurement())
+    //     string.Append("\tmode=direct_sun\n");
+    // else if (result->IsLunarMeasurement())
+    //     string.Append("\tmode=lunar\n");
+    // else if (result->IsWindMeasurement())
+    //     string.Append("\tmode=wind\n");
+    // else if (result->IsStratosphereMeasurement())
+    //     string.Append("\tmode=stratospheric\n");
+    // else if (result->IsCompositionMeasurement())
+    //     string.Append("\tmode=composition\n");
+    // else
+    //     string.Append("\tmode=plume\n");
 
     // The type of instrument used...
     if (instrLocation->m_instrumentType == INSTR_GOTHENBURG) {
@@ -331,8 +337,8 @@ RETURN_CODE CPostEvaluationController::WriteEvaluationResult(const CScanResult *
     }
 
     // 0.1 Create an flux-information part and write it to the same file
-    windField.GetWindSpeedSource(wsSrc);
-    windField.GetWindDirectionSource(wdSrc);
+    // windField.GetWindSpeedSource(wsSrc);
+    // windField.GetWindDirectionSource(wdSrc);
     // windField.GetPlumeHeightSource(phSrc);
 
         // Get the information on where the plume is seen
@@ -343,9 +349,9 @@ RETURN_CODE CPostEvaluationController::WriteEvaluationResult(const CScanResult *
     result->GetCalculatedPlumeEdges(plumeEdge1, plumeEdge2);
 
     string.Format("<fluxinfo>\n");
-    string.AppendFormat("\tflux=%.4lf\n", result->GetFlux()); // ton/day
-    string.AppendFormat("\twindspeed=%.4lf\n", windField.GetWindSpeed());
-    string.AppendFormat("\twinddirection=%.4lf\n", windField.GetWindDirection());
+    // string.AppendFormat("\tflux=%.4lf\n", result->GetFlux()); // ton/day
+    // string.AppendFormat("\twindspeed=%.4lf\n", windField.GetWindSpeed());
+    // string.AppendFormat("\twinddirection=%.4lf\n", windField.GetWindDirection());
     // string.AppendFormat("\tplumeheight=%.2lf\n",  windField.GetPlumeHeight());
     string.AppendFormat("\twindspeedsource=%s\n", (const char*)wsSrc);
     string.AppendFormat("\twinddirectionsource=%s\n", (const char*)wdSrc);
@@ -473,7 +479,6 @@ RETURN_CODE CPostEvaluationController::WriteEvaluationResult(const CScanResult *
 
     return SUCCESS;
 }
-*/
 
 // RETURN_CODE CPostEvaluationController::AppendToEvaluationSummaryFile(const CScanResult *result, const FileHandler::CScanFileHandler *scan, const Configuration::CInstrumentLocation* /*instrLocation*/, const Evaluation::CFitWindow *window, Meteorology::CWindField& /*windField*/) {
 //     novac::CString evalSummaryLog;
@@ -577,85 +582,88 @@ RETURN_CODE CPostEvaluationController::WriteEvaluationResult(const CScanResult *
 // 
 //     return SUCCESS;
 // }
-// 
-// RETURN_CODE CPostEvaluationController::GetArchivingfileName(novac::CString &pakFile, novac::CString &txtFile, const novac::CString &fitWindowName, const novac::CString &temporaryScanFile, MEASUREMENT_MODE mode) {
-//     CSpectrumIO reader;
-//     CSpectrum tmpSpec;
-//     novac::CString serialNumber, dateStr, timeStr, dateStr2, modeStr, userMessage;
-// 
-//     // 0. Make an initial assumption of the file-names
-//     int i = 0;
-//     while (1) {
-//         pakFile.Format("%s%cUnknownScans%c%d.pak", (const char*)g_userSettings.m_outputDirectory, Poco::Path::separator(), Poco::Path::separator(), ++i);
-//         if (!IsExistingFile(pakFile))
-//             break;
-//     }
-//     txtFile.Format("%s%cUnknownScans%c%d.txt", (const char*)g_userSettings.m_outputDirectory, Poco::Path::separator(), Poco::Path::separator(), i);
-// 
-//     // 1. Read the first spectrum in the scan
-//     const std::string temporaryScanFileStr((const char*)temporaryScanFile);
-//     if (SUCCESS != reader.ReadSpectrum(temporaryScanFileStr, 0, tmpSpec))
-//         return FAIL;
-//     CSpectrumInfo &info = tmpSpec.m_info;
-//     int channel = info.m_channel;
-// 
-//     // 1a. If the GPS had no connection with the satelites when collecting the sky-spectrum,
-//     //   then try to find a spectrum in the file for which it had connection...
-//     i = 1;
-//     while (info.m_startTime.year == 2004 && info.m_startTime.month == 3 && info.m_startTime.second == 22) {
-//         if (SUCCESS != reader.ReadSpectrum(temporaryScanFileStr, i++, tmpSpec))
-//             break;
-//         info = tmpSpec.m_info;
-//     }
-// 
-//     // 2. Get the serialNumber of the spectrometer
-//     serialNumber.Format("%s", info.m_device.c_str());
-// 
-//     // 3. Get the time and date when the scan started
-//     dateStr.Format("%02d%02d%02d", info.m_startTime.year % 1000, info.m_startTime.month, info.m_startTime.day);
-//     dateStr2.Format("%04d.%02d.%02d", info.m_startTime.year, info.m_startTime.month, info.m_startTime.day);
-//     timeStr.Format("%02d%02d", info.m_startTime.hour, info.m_startTime.minute);
-// 
-// 
-//     // 4. Write the archiving name of the spectrum file
-// 
-//     // 4a. Write the folder name
-//     pakFile.Format("%s%s%c%s%c%s%c", (const char*)g_userSettings.m_outputDirectory, (const char*)fitWindowName, Poco::Path::separator(),
-//         (const char*)dateStr2, Poco::Path::separator(), (const char*)serialNumber, Poco::Path::separator());
-//     txtFile.Format("%s", (const char*)pakFile);
-// 
-//     // 4b. Make sure that the folder exists
-//     int ret = CreateDirectoryStructure(pakFile);
-//     if (ret) {
-//         userMessage.Format("Could not create directory for archiving .pak-file: %s", (const char*)pakFile);
-//         ShowMessage(userMessage);
-//         return FAIL;
-//     }
-// 
-//     // 4c. Write the code for the measurement mode
-//     switch (mode) {
-//     case MODE_FLUX:   modeStr.Format("flux"); break;
-//     case MODE_WINDSPEED: modeStr.Format("wind"); break;
-//     case MODE_STRATOSPHERE: modeStr.Format("stra"); break;
-//     case MODE_DIRECT_SUN: modeStr.Format("dsun"); break;
-//     case MODE_COMPOSITION:  modeStr.Format("comp"); break;
-//     case MODE_LUNAR:  modeStr.Format("luna"); break;
-//     case MODE_TROPOSPHERE:  modeStr.Format("trop"); break;
-//     case MODE_MAXDOAS:  modeStr.Format("maxd"); break;
-//     default:    modeStr.Format("unkn"); break;
-//     }
-// 
-//     // 4c. Write the name of the archiving file itself
-//     if (channel < 128 && channel > MAX_CHANNEL_NUM)
-//         channel = channel % 16;
-//     pakFile.AppendFormat("%s_%s_%s_%1d_%4s.pak", (const char*)serialNumber, (const char*)dateStr, (const char*)timeStr, channel, (const char*)modeStr);
-//     txtFile.AppendFormat("%s_%s_%s_%1d_%4s.txt", (const char*)serialNumber, (const char*)dateStr, (const char*)timeStr, channel, (const char*)modeStr);
-// 
-//     if (strlen(pakFile) > MAX_PATH)
-//         return FAIL;
-// 
-//     return SUCCESS;
-// }
+
+RETURN_CODE CPostEvaluationController::GetArchivingfileName(novac::CString &pakFile, novac::CString &txtFile, const novac::CString &fitWindowName, const novac::CString &temporaryScanFile, MEASUREMENT_MODE mode)
+{
+    CSpectrumIO reader;
+    CSpectrum tmpSpec;
+    novac::CString serialNumber, dateStr, timeStr, dateStr2, modeStr, userMessage;
+
+    // 0. Make an initial assumption of the file-names
+    int i = 0;
+    while (1) {
+        pakFile.Format("%s%cUnknownScans%c%d.pak", (const char*)g_userSettings.m_outputDirectory, '/', '/', ++i);
+        if (!IsExistingFile(pakFile))
+            break;
+    }
+    txtFile.Format("%s%cUnknownScans%c%d.txt", (const char*)g_userSettings.m_outputDirectory, '/', '/', i);
+
+    // 1. Read the first spectrum in the scan
+    const std::string temporaryScanFileStr((const char*)temporaryScanFile);
+    if (SUCCESS != reader.ReadSpectrum(temporaryScanFileStr, 0, tmpSpec))
+        return FAIL;
+    CSpectrumInfo &info = tmpSpec.m_info;
+    int channel = info.m_channel;
+
+    // 1a. If the GPS had no connection with the satelites when collecting the sky-spectrum,
+    //   then try to find a spectrum in the file for which it had connection...
+    i = 1;
+    while (info.m_startTime.year == 2004 && info.m_startTime.month == 3 && info.m_startTime.second == 22) {
+        if (SUCCESS != reader.ReadSpectrum(temporaryScanFileStr, i++, tmpSpec))
+            break;
+        info = tmpSpec.m_info;
+    }
+
+    // 2. Get the serialNumber of the spectrometer
+    serialNumber.Format("%s", info.m_device.c_str());
+
+    // 3. Get the time and date when the scan started
+    dateStr.Format("%02d%02d%02d", info.m_startTime.year % 1000, info.m_startTime.month, info.m_startTime.day);
+    dateStr2.Format("%04d.%02d.%02d", info.m_startTime.year, info.m_startTime.month, info.m_startTime.day);
+    timeStr.Format("%02d%02d", info.m_startTime.hour, info.m_startTime.minute);
+
+
+    // 4. Write the archiving name of the spectrum file
+
+    // 4a. Write the folder name
+    // pakFile.Format("%s%s%c%s%c%s%c", (const char*)g_userSettings.m_outputDirectory, (const char*)fitWindowName, '/',
+    //     (const char*)dateStr2, '/', (const char*)serialNumber, '/');
+    pakFile.Format("%s%s_%s_%s_", (const char*)g_userSettings.m_outputDirectory, (const char*)fitWindowName,
+        (const char*)dateStr2, (const char*)serialNumber);
+    txtFile.Format("%s", (const char*)pakFile);
+
+    // 4b. Make sure that the folder exists
+    // int ret = CreateDirectoryStructure(pakFile);
+    // if (ret) {
+    //     userMessage.Format("Could not create directory for archiving .pak-file: %s", (const char*)pakFile);
+    //     ShowMessage(userMessage);
+    //     return FAIL;
+    // }
+
+    // 4c. Write the code for the measurement mode
+    switch (mode) {
+    case MODE_FLUX:   modeStr.Format("flux"); break;
+    case MODE_WINDSPEED: modeStr.Format("wind"); break;
+    case MODE_STRATOSPHERE: modeStr.Format("stra"); break;
+    case MODE_DIRECT_SUN: modeStr.Format("dsun"); break;
+    case MODE_COMPOSITION:  modeStr.Format("comp"); break;
+    case MODE_LUNAR:  modeStr.Format("luna"); break;
+    case MODE_TROPOSPHERE:  modeStr.Format("trop"); break;
+    case MODE_MAXDOAS:  modeStr.Format("maxd"); break;
+    default:    modeStr.Format("unkn"); break;
+    }
+
+    // 4c. Write the name of the archiving file itself
+    if (channel < 128 && channel > MAX_CHANNEL_NUM)
+        channel = channel % 16;
+    pakFile.AppendFormat("%s_%s_%s_%1d_%4s.pak", (const char*)serialNumber, (const char*)dateStr, (const char*)timeStr, channel, (const char*)modeStr);
+    txtFile.AppendFormat("%s_%s_%s_%1d_%4s.txt", (const char*)serialNumber, (const char*)dateStr, (const char*)timeStr, channel, (const char*)modeStr);
+
+    // if (strlen(pakFile) > MAX_PATH)
+    //     return FAIL;
+
+    return SUCCESS;
+}
 
 int CPostEvaluationController::GetLocationAndFitWindow(FileHandler::CScanFileHandler *scan, const novac::CString &fitWindowName, Configuration::CInstrumentLocation &instrLocation, Evaluation::CFitWindow &window) {
     CSpectrum skySpec;
