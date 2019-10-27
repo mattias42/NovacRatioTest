@@ -2,7 +2,8 @@
 #include "ScanEvaluation.h"
 #include <cstring>
 #include <SpectralEvaluation/Configuration/DarkSettings.h>
-#include <SpectralEvaluation/Evaluation/RatioEvaluation.h>
+// #include <SpectralEvaluation/Evaluation/RatioEvaluation.h>
+#include <SpectralEvaluation/Evaluation/PlumeSpectrumSelector.h>
 
 #include "../Common/EvaluationLogFileHandler.h"
 
@@ -172,23 +173,30 @@ int CPostEvaluationController::EvaluateScan(const novac::CString& pakFileName, c
 #ifdef _MSC_VER
 #ifdef _DEBUG
 
-    // TESTING!
-    if (fitWindow.child.size() != 0)
-    {
-        RatioEvaluationSettings ratioSettings;
-        RatioEvaluation ratio{ ratioSettings, darkSettings };
-        ratio.SetupFirstResult(*m_lastResult, *plumeProperties);
-        ratio.SetupFitWindows(fitWindow, fitWindow.child);
-        std::vector<Ratio> broRatios = ratio.Run(scan);
+    // --------------- TESTING SELECTING SPECTRA FOR IN/OUT PLUME ---------------
+    PlumeSpectrumSelector spectrumSelector;
+    int specieIndex = m_lastResult->GetSpecieIndex("SO2");
+    std::vector<int> referenceSpectra;
+    std::vector<int> inPlumeSpectra;
+    spectrumSelector.SelectSpectra(*m_lastResult, *plumeProperties, specieIndex, referenceSpectra, inPlumeSpectra);
 
-        if (broRatios.size() > 0)
-        {
-            if (SUCCESS != WriteRatioResult(broRatios, scan, fitWindow)) {
-                errorMessage.Format("Failed to write evaluation ratio result to file %s. No result produced", txtFileName);
-                ShowMessage(errorMessage);
-            }
-        }
-    }
+    // TESTING!
+    // if (fitWindow.child.size() != 0)
+    // {
+    //     RatioEvaluationSettings ratioSettings;
+    //     RatioEvaluation ratio{ ratioSettings, darkSettings };
+    //     ratio.SetupFirstResult(*m_lastResult, *plumeProperties);
+    //     ratio.SetupFitWindows(fitWindow, fitWindow.child);
+    //     std::vector<Ratio> broRatios = ratio.Run(scan);
+    // 
+    //     if (broRatios.size() > 0)
+    //     {
+    //         if (SUCCESS != WriteRatioResult(broRatios, scan, fitWindow)) {
+    //             errorMessage.Format("Failed to write evaluation ratio result to file %s. No result produced", txtFileName);
+    //             ShowMessage(errorMessage);
+    //         }
+    //     }
+    // }
 #endif // _DEBUG
 #endif // _MSC_VER
 
