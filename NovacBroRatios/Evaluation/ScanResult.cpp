@@ -167,7 +167,7 @@ int CScanResult::CalculateOffset(const CMolecule &specie) {
     }
 
     // Get the index for the specie for which we want to calculate the offset
-    long specieIndex = GetSpecieIndex(specie.m_name);
+    long specieIndex = GetSpecieIndex(specie.m_name.c_str());
     if (specieIndex == -1) { // if the specified specie does not exist
         return 1;
     }
@@ -317,7 +317,7 @@ bool CScanResult::CalculatePlumeCentre(const CMolecule &specie, CPlumeInScanProp
     //     return false;
 
     // get the specie index
-    int specieIndex = GetSpecieIndex(specie.m_name);
+    int specieIndex = GetSpecieIndex(specie.m_name.c_str());
     if (specieIndex == -1) {
         return false;
     }
@@ -405,7 +405,7 @@ double CScanResult::GetColumn(unsigned long spectrumNum, unsigned long specieNum
 }
 
 double CScanResult::GetColumn(unsigned long spectrumNum, CMolecule &molec) const {
-    int index = this->GetSpecieIndex(molec.m_name);
+    int index = this->GetSpecieIndex(molec.m_name.c_str());
     if (index == -1)
         return NOT_A_NUMBER;
     else

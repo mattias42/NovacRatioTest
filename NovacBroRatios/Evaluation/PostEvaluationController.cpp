@@ -157,7 +157,8 @@ int CPostEvaluationController::EvaluateScan(const novac::CString& pakFileName, c
     // 11. If this was a flux-measurement then we need to see the plume for the measurement to be useful
     //  this check should only be performed on the main fit window.
     if (Equals(fitWindow.name, g_userSettings.m_fitWindowsToUse[g_userSettings.m_mainFitWindow])) {
-        if (0 == CheckQualityOfFluxMeasurement(m_lastResult, pakFileName)) {
+        if (0 == CheckQualityOfFluxMeasurement(m_lastResult, pakFileName))
+        {
             errorMessage.Format("Flux-calculation of pak-file %s failed.", (const char*)pakFileName);
             ShowMessage(errorMessage);
             delete m_lastResult; m_lastResult = nullptr;
@@ -166,7 +167,8 @@ int CPostEvaluationController::EvaluateScan(const novac::CString& pakFileName, c
     }
 
     // 12. Return the properties of the scan
-    if (plumeProperties != nullptr) {
+    if (plumeProperties != nullptr)
+    {
         m_lastResult->GetCalculatedPlumeProperties(*plumeProperties);
     }
 
@@ -178,7 +180,7 @@ int CPostEvaluationController::EvaluateScan(const novac::CString& pakFileName, c
     int specieIndex = m_lastResult->GetSpecieIndex("SO2");
     std::vector<int> referenceSpectra;
     std::vector<int> inPlumeSpectra;
-    spectrumSelector.SelectSpectra(*m_lastResult, *plumeProperties, specieIndex, referenceSpectra, inPlumeSpectra);
+    spectrumSelector.SelectSpectra(scan, *m_lastResult, *plumeProperties, specieIndex, referenceSpectra, inPlumeSpectra);
 
     // TESTING!
     // if (fitWindow.child.size() != 0)
