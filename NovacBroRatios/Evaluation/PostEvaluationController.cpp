@@ -176,11 +176,9 @@ int CPostEvaluationController::EvaluateScan(const novac::CString& pakFileName, c
 #ifdef _DEBUG
 
     // --------------- TESTING SELECTING SPECTRA FOR IN/OUT PLUME ---------------
+    int specieIndex = m_lastResult->GetSpecieIndex("SO2"); // TODO: Move up and use this more througout this file
     PlumeSpectrumSelector spectrumSelector;
-    int specieIndex = m_lastResult->GetSpecieIndex("SO2");
-    std::vector<size_t> referenceSpectra;
-    std::vector<size_t> inPlumeSpectra;
-    spectrumSelector.SelectSpectra(scan, *m_lastResult, *plumeProperties, specieIndex, referenceSpectra, inPlumeSpectra);
+    spectrumSelector.CreatePlumeSpectrumFile(scan, *m_lastResult, *plumeProperties, specieIndex);
 
     // TESTING!
     // if (fitWindow.child.size() != 0)
