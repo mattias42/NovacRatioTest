@@ -14,7 +14,7 @@ Configuration::CNovacPPPConfiguration g_setup;
 extern Configuration::CUserConfiguration g_userSettings;
 
 std::string BinaryLocation = "D:/Development/NovacRatioTest/bin/";
-std::string ConfigurationLocation = "D:/Development/NovacRatioTest/ConfigurationFiles/";
+std::string ConfigurationLocation = "D:/Development/NovacRatioTest/ConfigurationFiles/Masaya/";
 
 void LoadConfigurations()
 {

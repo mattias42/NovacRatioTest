@@ -316,22 +316,24 @@ void CPostProcessing::EvaluateScans(const std::vector<std::string>& pakFileList,
     ShowMessage(messageToUser);
 }
 
-void EvaluateScansThread() {
-    std::string fileName;
-
-    // create a new CPostEvaluationController
+void EvaluateScansThread()
+{
     Evaluation::CPostEvaluationController eval;
 
     // while there are more .pak-files
-    while (s_pakFilesRemaining.PopFront(fileName)) {
+    std::string fileName;
+    while (s_pakFilesRemaining.PopFront(fileName))
+    {
         novac::CString evalLog[MAX_FIT_WINDOWS];
         CPlumeInScanProperty scanProperties[MAX_FIT_WINDOWS];
 
         // evaluate the .pak-file in all the specified fit-windows and retrieve the name of the 
         // eval-logs. If any of the fit-windows fails then the scan is not inserted.
         bool evaluationSucceeded = true;
-        for (int fitWindowIndex = 0; fitWindowIndex < g_userSettings.m_nFitWindowsToUse; ++fitWindowIndex) {
-            if (0 != eval.EvaluateScan(fileName, g_userSettings.m_fitWindowsToUse[fitWindowIndex], &evalLog[fitWindowIndex], &scanProperties[fitWindowIndex])) {
+        for (int fitWindowIndex = 0; fitWindowIndex < g_userSettings.m_nFitWindowsToUse; ++fitWindowIndex)
+        {
+            if (0 != eval.EvaluateScan(fileName, g_userSettings.m_fitWindowsToUse[fitWindowIndex], &evalLog[fitWindowIndex], &scanProperties[fitWindowIndex]))
+            {
                 evaluationSucceeded = false;
                 break;
             }

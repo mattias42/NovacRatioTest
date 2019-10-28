@@ -172,13 +172,14 @@ int CPostEvaluationController::EvaluateScan(const novac::CString& pakFileName, c
         m_lastResult->GetCalculatedPlumeProperties(*plumeProperties);
     }
 
-#ifdef _MSC_VER
-#ifdef _DEBUG
+// #ifdef _MSC_VER
+// #ifdef _DEBUG
 
     // --------------- TESTING SELECTING SPECTRA FOR IN/OUT PLUME ---------------
     {
         int specieIndex = m_lastResult->GetSpecieIndex("SO2"); // TODO: Move up and use this more througout this file
         PlumeSpectrumSelector spectrumSelector;
+
         spectrumSelector.CreatePlumeSpectrumFile(scan, *m_lastResult, *plumeProperties, specieIndex, "D:/Development/NovacRatioTest/Data/Output/");
     }
 
@@ -199,8 +200,8 @@ int CPostEvaluationController::EvaluateScan(const novac::CString& pakFileName, c
     //         }
     //     }
     // }
-#endif // _DEBUG
-#endif // _MSC_VER
+// #endif // _DEBUG
+// #endif // _MSC_VER
 
     // 13. Clean up
     delete m_lastResult;
