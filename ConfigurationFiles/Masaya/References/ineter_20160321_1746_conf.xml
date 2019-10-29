@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- This is the configuration file for the evaluation of spectra in the NOVAC project.
+ 	All spectrometers that are used must be defined here or their spectra will NOT be evaluated -->
+
+<Configuration>
+	<outputDir>C:\Program Files (x86)\Output\</outputDir>
+	<startup>0</startup>
+	<ftpAddress>129.16.35.206</ftpAddress>
+	<ftpUserName>novacUser</ftpUserName>
+	<ftpStartTime>0</ftpStartTime>
+	<ftpStopTime>86400</ftpStopTime>
+	<windImport>
+		<path>ftp://129.16.35.206/wind/wind_telica.txt</path>
+		<reloadInterval>360</reloadInterval>
+	</windImport>
+	<deviceList>
+		<scanningInstrument>
+			<observatory>ineter</observatory>
+			<volcano>Masaya</volcano>
+			<site>Caracol</site>
+			<instr_latitude>0.000000</instr_latitude>
+			<instr_longitude>0.000000</instr_longitude>
+			<instr_altitude>0.000000</instr_altitude>
+			<instr_compass>0.000000</instr_compass>
+			<type>0</type>
+			<electronics>0</electronics>
+			<spectrometer>
+				<serialNumber>D2J2124</serialNumber>
+				<model>S2000</model>
+				<channel number="0">
+					<Reference>
+						<name>O3</name>
+						<path>C:\Program Files (x86)\archivos de referencias estaciones\masaya caracol\D2J2124_O3_223K_HP500.txt</path>
+						<shift>fix to 0.00</shift>
+						<squeeze>fix to 1.00</squeeze>
+					</Reference>
+					<Reference>
+						<name>RING</name>
+						<path>C:\Program Files (x86)\archivos de referencias estaciones\masaya caracol\D2J2124_Ring_HR_HP500.txt</path>
+						<shift>fix to 0.00</shift>
+						<squeeze>fix to 1.00</squeeze>
+					</Reference>
+					<Reference>
+						<name>SO2</name>
+						<path>C:\Program Files (x86)\archivos de referencias estaciones\masaya caracol\D2J2124_SO2_294K_HP500.txt</path>
+						<shift>fix to 0.00</shift>
+						<squeeze>fix to 1.00</squeeze>
+					</Reference>
+					<fitLow>320</fitLow>
+					<fitHigh>460</fitHigh>
+				</channel>
+			</spectrometer>
+			<communication>
+				<connection>2</connection>
+				<IP>192.168.50.85</IP>
+				<username>novac</username>
+				<password>1225</password>
+				<timeout>5000</timeout>
+				<queryPeriod>180</queryPeriod>
+				<sleepTime>64800</sleepTime>
+				<wakeupTime>21600</wakeupTime>
+			</communication>
+			<motor>
+				<stepsperround1>200</stepsperround1>
+				<motorstepscomp1>95</motorstepscomp1>
+			</motor>
+		</scanningInstrument>
+		<scanningInstrument>
+			<observatory>ineter</observatory>
+			<sourceInfo>
+				<name>Telica</name>
+				<latitude>12.598092</latitude>
+				<longitude>-86.902147</longitude>
+				<altitude>230.000000</altitude>
+			</sourceInfo>
+			<site>Los Mendoza</site>
+			<instr_latitude>0.000000</instr_latitude>
+			<instr_longitude>0.000000</instr_longitude>
+			<instr_altitude>0.000000</instr_altitude>
+			<instr_compass>0.000000</instr_compass>
+			<type>0</type>
+			<electronics>0</electronics>
+			<spectrometer>
+				<serialNumber>D2J2834</serialNumber>
+				<model>S2000</model>
+				<channel number="0">
+					<Reference>
+						<name>O3</name>
+						<path>C:\Program Files (x86)\archivos de referencias estaciones\referencias_telica\D2J2834_O3_223K_100mb_Voigt_HP500_Master.txt</path>
+						<shift>fix to 0.00</shift>
+						<squeeze>fix to 1.00</squeeze>
+					</Reference>
+					<Reference>
+						<name>SO2</name>
+						<path>C:\Program Files (x86)\archivos de referencias estaciones\referencias_telica\D2J2834_SO2_293K_Bogumil_HP500_Master.txt</path>
+						<shift>fix to 0.00</shift>
+						<squeeze>fix to 1.00</squeeze>
+					</Reference>
+					<Reference>
+						<name>RING</name>
+						<path>C:\Program Files (x86)\archivos de referencias estaciones\referencias_telica\D2J2834_Ring_HR_HP500_Master.txt</path>
+						<shift>fix to 0.00</shift>
+						<squeeze>fix to 1.00</squeeze>
+					</Reference>
+					<fitLow>320</fitLow>
+					<fitHigh>460</fitHigh>
+				</channel>
+			</spectrometer>
+			<communication>
+				<connection>2</connection>
+				<IP>192.168.50.78</IP>
+				<username>novac</username>
+				<password>1225</password>
+				<timeout>5000</timeout>
+				<queryPeriod>180</queryPeriod>
+				<sleepTime>64800</sleepTime>
+				<wakeupTime>21600</wakeupTime>
+			</communication>
+			<motor>
+				<stepsperround1>200</stepsperround1>
+				<motorstepscomp1>116</motorstepscomp1>
+			</motor>
+		</scanningInstrument>
+		<scanningInstrument>
+			<observatory>ineter</observatory>
+			<sourceInfo>
+				<name>Momotombo</name>
+				<latitude>12.405923</latitude>
+				<longitude>-86.610552</longitude>
+				<altitude>55.000000</altitude>
+			</sourceInfo>
+			<site>Puerto Momotombo</site>
+			<instr_latitude>12.405955</instr_latitude>
+			<instr_longitude>-86.610545</instr_longitude>
+			<instr_altitude>64.300000</instr_altitude>
+			<instr_compass>13.000000</instr_compass>
+			<type>0</type>
+			<electronics>1</electronics>
+			<spectrometer>
+				<serialNumber>I2J9303</serialNumber>
+				<model>S2000</model>
+				<channel number="0">
+					<Reference>
+						<name>O3</name>
+						<path>C:\Program Files (x86)\archivos de referencias estaciones\Archivos de Referencia Momo_9122015\I2J9303_O3_223K_HP500_Master.txt</path>
+						<shift>fix to 0.00</shift>
+						<squeeze>fix to 1.00</squeeze>
+					</Reference>
+					<Reference>
+						<name>RING</name>
+						<path>C:\Program Files (x86)\archivos de referencias estaciones\Archivos de Referencia Momo_9122015\I2J9303_Ring_HR_HP500_Master.txt</path>
+						<shift>fix to 0.00</shift>
+						<squeeze>fix to 1.00</squeeze>
+					</Reference>
+					<Reference>
+						<name>SO2</name>
+						<path>C:\Program Files (x86)\archivos de referencias estaciones\Archivos de Referencia Momo_9122015\I2J9303_SO2_294K_HP500_Master.txt</path>
+						<shift>fix to 0.00</shift>
+						<squeeze>fix to 1.00</squeeze>
+					</Reference>
+					<fitLow>320</fitLow>
+					<fitHigh>460</fitHigh>
+				</channel>
+			</spectrometer>
+			<communication>
+				<connection>2</connection>
+				<IP>186.77.56.38</IP>
+				<username>novac</username>
+				<password>1225</password>
+				<timeout>5000</timeout>
+				<queryPeriod>180</queryPeriod>
+				<sleepTime>64800</sleepTime>
+				<wakeupTime>21600</wakeupTime>
+			</communication>
+			<motor>
+				<stepsperround1>200</stepsperround1>
+				<motorstepscomp1>90</motorstepscomp1>
+			</motor>
+		</scanningInstrument>
+	</deviceList>
+</Configuration>

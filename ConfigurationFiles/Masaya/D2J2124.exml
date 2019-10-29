@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- This is the configuration file for the evaluation of spectra in the NOVAC Post Processing Program -->
+
+<EvaluationConfiguration>
+	<serial>D2J2124</serial>
+	
+	<!-- Master channel -->
+	<fitWindow>
+		<channel>0</channel>
+		<name>SO2</name>
+		<validFrom>2009.01.01</validFrom>
+		<validTo>TODAY()</validTo>
+		<specLength>2048</specLength>
+		<interlaceStep>0</interlaceStep>
+        <shiftSky>0</shiftSky>
+		<polyOrder>5</polyOrder>
+		<fitType>0</fitType>
+		<fitLow>320</fitLow>
+		<fitHigh>460</fitHigh>
+		<Reference>
+			<name>SO2</name>
+			<path>D:\Development\NovacRatioTest\ConfigurationFiles\Masaya\References\D2J2124_0_SO2_20160321_1746.txt</path>
+			<shiftOption>1</shiftOption>
+			<shiftValue>0.000000</shiftValue>
+			<squeezeOption>1</squeezeOption>
+			<squeezeValue>1.000000</squeezeValue>
+			<columnOption>0</columnOption>
+            <filtered>HP500</filtered>
+		</Reference>
+		<Reference>
+			<name>O3</name>
+			<path>D:\Development\NovacRatioTest\ConfigurationFiles\Masaya\References\D2J2124_0_O3_20160321_1746.txt</path>
+			<shiftOption>1</shiftOption>
+			<shiftValue>0.000000</shiftValue>
+			<squeezeOption>1</squeezeOption>
+			<squeezeValue>1.000000</squeezeValue>
+			<columnOption>0</columnOption>
+            <filtered>HP500</filtered>
+		</Reference>
+		<Reference>
+			<name>RING</name>
+			<path>D:\Development\NovacRatioTest\ConfigurationFiles\Masaya\References\D2J2124_0_RING_20160321_1746.txt</path>
+			<shiftOption>1</shiftOption>
+			<shiftValue>0.000000</shiftValue>
+			<squeezeOption>1</squeezeOption>
+			<squeezeValue>1.000000</squeezeValue>
+			<columnOption>0</columnOption>
+            <filtered>HP500</filtered>
+		</Reference>
+		</DarkCorrection>
+			<dark>SCAN</dark>
+		</DarkCorrection>
+	</fitWindow>
+</EvaluationConfiguration>

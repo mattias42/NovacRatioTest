@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- This is the global configuration file for the evaluation of spectra in the NOVAC Post Processing Program -->
+
+<NovacPPPConfiguration>
+	<!-- The following instruments are for Masays -->
+	<instrument>
+		<serial>D2J2124</serial>
+		<location>
+			<name>Caracol</name>
+			<time_from>2009.11.01</time_from>
+			<time_to>TODAY()</time_to>
+			<latitude>0.0</latitude>
+			<longitude>0.0</longitude>
+			<altitude>0.0</altitude>
+			<volcano>Masaya</volcano>
+			<compass>0.000000</compass>
+			<coneangle>90.0</coneangle>
+			<type>0</type>
+			<spec>S2000</spec>
+		</location>
+	</instrument>
+</NovacPPPConfiguration>

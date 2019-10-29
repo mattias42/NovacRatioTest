@@ -1,0 +1,101 @@
+% ----- Modified at 2009.11.10 13:00 ------------
+
+% Questions? email
+% conde@chalmers.se
+
+% The following channels defines which channels in the spectra that will be transferred
+%  This should normally be all pixels on the detector (0 -> 2047)
+STARTCHN=0
+STOPCHN=2047
+
+% If Realtime=1 then the spectra will be added to work.pak one at a time.
+% If RealTime=0 then the spectra will be added to work.pak one scan at a time
+REALTIME=0
+
+% The Cone-Angle of the system (half the opening angle of the cone)
+%  Should be 90 if this is a flat instrument and 60 if this is a conical
+CONEANGLE=90
+
+% The geometry: compassDirection  tiltX(=roll)  tiltY(=pitch)  temperature
+COMPASS=54.4 0.0 0.0
+
+% StepsPerRound defines the number of steps the steppermotor divides one round into
+STEPSPERROUND=200
+MOTORSTEPSCOMP=95
+DELAY=300
+POWERSAVE=0
+SKIPMOTOR=0
+%If Skipmotor=1 then the scanner will not be used. ONLY FOR TESTING PURPOSES
+
+
+% The computer will shut down all activity if the voltage of the battery is below this limit
+BATTERYLIMIT=10
+
+% Percent defines how big part of the spectrometers dynamic range we want to use
+PERCENT=0.6
+
+% Channel is the pixel around which the intensity of the spectra will be measured 
+%  a value of -1 means the maximum value in the spectrum
+CHANNEL=-1
+
+% The maximum integration time that we allow the spectrometer to use. In milli seconds
+MAXINTTIME=1000
+
+% The debug-level, the higher number the more output will be created
+DEBUG=1
+
+% sum1 is inside the specrometer [1 to 15]
+%-----pos----time-sum1-sum2--chn--basename----- repetitions--flag
+MEAS=0 -1 15 1 0 sky 1 0
+MEAS=100 0 15 1 0 dark 1 0
+MEAS=-50 0 15 1 0 scan 1 0
+MEAS=-48 0 15 1 0 scan 1 0
+MEAS=-46 0 15 1 0 scan 1 0
+MEAS=-44 0 15 1 0 scan 1 0
+MEAS=-42 0 15 1 0 scan 1 0
+MEAS=-40 0 15 1 0 scan 1 0
+MEAS=-38 0 15 1 0 scan 1 0
+MEAS=-36 0 15 1 0 scan 1 0
+MEAS=-34 0 15 1 0 scan 1 0
+MEAS=-32 0 15 1 0 scan 1 0
+MEAS=-30 0 15 1 0 scan 1 0
+MEAS=-28 0 15 1 0 scan 1 0
+MEAS=-26 0 15 1 0 scan 1 0
+MEAS=-24 0 15 1 0 scan 1 0
+MEAS=-22 0 15 1 0 scan 1 0
+MEAS=-20 0 15 1 0 scan 1 0
+MEAS=-18 0 15 1 0 scan 1 0
+MEAS=-16 0 15 1 0 scan 1 0
+MEAS=-14 0 15 1 0 scan 1 0
+MEAS=-12 0 15 1 0 scan 1 0
+MEAS=-10 0 15 1 0 scan 1 0
+MEAS=-8 0 15 1 0 scan 1 0
+MEAS=-6 0 15 1 0 scan 1 0
+MEAS=-4 0 15 1 0 scan 1 0
+MEAS=-2 0 15 1 0 scan 1 0
+MEAS=0 0 15 1 0 scan 1 0
+MEAS=2 0 15 1 0 scan 1 0
+MEAS=4 0 15 1 0 scan 1 0
+MEAS=6 0 15 1 0 scan 1 0
+MEAS=8 0 15 1 0 scan 1 0
+MEAS=10 0 15 1 0 scan 1 0
+MEAS=12 0 15 1 0 scan 1 0
+MEAS=14 0 15 1 0 scan 1 0
+MEAS=16 0 15 1 0 scan 1 0
+MEAS=18 0 15 1 0 scan 1 0
+MEAS=20 0 15 1 0 scan 1 0
+MEAS=22 0 15 1 0 scan 1 0
+MEAS=24 0 15 1 0 scan 1 0
+MEAS=26 0 15 1 0 scan 1 0
+MEAS=28 0 15 1 0 scan 1 0
+MEAS=30 0 15 1 0 scan 1 0
+MEAS=32 0 15 1 0 scan 1 0
+MEAS=34 0 15 1 0 scan 1 0
+MEAS=36 0 15 1 0 scan 1 0
+MEAS=38 0 15 1 0 scan 1 0
+MEAS=40 0 15 1 0 scan 1 0
+MEAS=42 0 15 1 0 scan 1 0
+MEAS=44 0 15 1 0 scan 1 0
+MEAS=46 0 15 1 0 scan 1 0
+MEAS=48 0 15 1 0 scan 1 0
+MEAS=50 0 15 1 0 scan 1 0

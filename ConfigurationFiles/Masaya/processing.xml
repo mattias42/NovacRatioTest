@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- This is the configuration file for the processing of scans in the NOVAC Post Processing Program -->
+<NovacPostProcessing>
+	<outputdirectory>D:\Development\NovacRatioTest\Data\Output\</outputdirectory>
+	<tempdirectory>D:\Development\NovacRatioTest\Data\Temp\</tempdirectory>
+	<LocalDirectory>D:\Development\NovacRatioTest\Data\</LocalDirectory>
+
+	<MaxThreadNum>1</MaxThreadNum>
+	<IncludeSubDirs_FTP>1</IncludeSubDirs_FTP>
+	<mode>Flux</mode>
+	<molecule>SO2</molecule>
+	<Volcano>1501-02=</Volcano>
+	<FromDate>2009.11.01</FromDate>
+	<ToDate>2012.12.31</ToDate>
+	<WindFieldFile>D:/NOVAC/NovacData/nevado_del_ruiz/ecmwf_analysis/</WindFieldFile>
+	<WindFileOption>1</WindFileOption>
+	<FitWindows>
+		<item>SO2</item>
+		<main>SO2</main>
+	</FitWindows>
+	<SkySpectrum>
+		<option>SCAN</option>
+	</SkySpectrum>
+	<GeometryCalc>
+		<completenessLimit>0.00</completenessLimit>
+		<validTime>3600</validTime>
+	</GeometryCalc>
+	<Discarding>
+		<completenessLimit>0.00</completenessLimit>
+		<minimumSaturationInFitRegion>0.00</minimumSaturationInFitRegion>
+		<MaxExpTime_Got>1000</MaxExpTime_Got>
+	</Discarding>
+</NovacPostProcessing>
+

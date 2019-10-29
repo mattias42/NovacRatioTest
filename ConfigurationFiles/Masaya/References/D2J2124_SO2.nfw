@@ -1,0 +1,37 @@
+<fitWindow name="SO2">
+	<fitLow>320</fitLow>
+	<fitHigh>460</fitHigh>
+	<polyOrder>5</polyOrder>
+	<fitType>0</fitType>
+	<channel>0</channel>
+	<specLength>2048</specLength>
+	<fOptShift>0</fOptShift>
+	<UV>1</UV>
+	<shiftSky>1</shiftSky>
+	<interlaceStep>1</interlaceStep>
+	<nRef>3</nRef>
+	<ref name="SO2">
+		<path>D:\Development\NovacRatioTest\ConfigurationFiles\Masaya\References\D2J2124_0_SO2_20160321_1746.txt</path>
+		<shiftOption>1</shiftOption>
+		<shiftValue>0.000000</shiftValue>
+		<squeezeOption>1</squeezeOption>
+		<squeezeValue>1.000000</squeezeValue>
+		<columnOption>0</columnOption>
+	</ref>
+	<ref name="O3">
+		<path>D:\Development\NovacRatioTest\ConfigurationFiles\Masaya\References\D2J2124_0_O3_20160321_1746.txt</path>
+		<shiftOption>1</shiftOption>
+		<shiftValue>0.000000</shiftValue>
+		<squeezeOption>1</squeezeOption>
+		<squeezeValue>1.000000</squeezeValue>
+		<columnOption>0</columnOption>
+	</ref>
+	<ref name="RING">
+		<path>D:\Development\NovacRatioTest\ConfigurationFiles\Masaya\References\D2J2124_0_RING_20160321_1746.txt</path>
+		<shiftOption>1</shiftOption>
+		<shiftValue>0.000000</shiftValue>
+		<squeezeOption>1</squeezeOption>
+		<squeezeValue>1.000000</squeezeValue>
+		<columnOption>0</columnOption>
+	</ref>
+</fitWindow>
